@@ -2,7 +2,8 @@
 import * as THREE from 'three';
 
 import {moveControls, zoomControls} from './controls.js'
-import { collidableObjects, addToScene } from './main.js';
+import { collidableObjects } from './physics.js';
+import { addToScene } from './main.js';
 
 // Constants/Attributes
 export const originalFOV = 75;
