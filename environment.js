@@ -1,7 +1,8 @@
 // Import Three.js
 import * as THREE from 'three';
 
-import { collidableObjects, addToScene } from './main.js';
+import { collidableObjects } from './physics.js';
+import { addToScene } from './main.js';
 
 class Wall {
     constructor({x=0, y=2.5, z=-5, w=6, h=5, d=1} = {}){
@@ -117,15 +118,6 @@ export function environmentinit() {
 
     // Add the floor to the scene
     addToScene(floor);
-
-    /* Add a void
-    const voidGeometry = new THREE.PlaneGeometry(10000, 10000);
-    const voidMaterial = new THREE.MeshBasicMaterial({color: 0x003080});
-    const voidSpace = new THREE.Mesh(voidGeometry, voidMaterial);
-    voidSpace.receiveShadow = true;
-    voidSpace.rotation.x = -Math.PI / 2;
-    voidSpace.position.y = -100;
-    scene.add(voidSpace); */
 
     // Add walls
     const wall1 = new Wall();
