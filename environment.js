@@ -119,15 +119,6 @@ export function environmentinit() {
     // Add the floor to the scene
     addToScene(floor);
 
-    /* Add a void
-    const voidGeometry = new THREE.PlaneGeometry(10000, 10000);
-    const voidMaterial = new THREE.MeshBasicMaterial({color: 0x003080});
-    const voidSpace = new THREE.Mesh(voidGeometry, voidMaterial);
-    voidSpace.receiveShadow = true;
-    voidSpace.rotation.x = -Math.PI / 2;
-    voidSpace.position.y = -100;
-    scene.add(voidSpace); */
-
     // Add walls
     const wall1 = new Wall();
     const wall2 = new Wall(({x: 10}));

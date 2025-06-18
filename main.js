@@ -15,24 +15,17 @@ const clock = new THREE.Clock();
 // Initialize the scene
 const {scene, camera, renderer} = sceneinit(originalFOV, spawnPos);
 const {controls} = controlsinit(camera, renderer);
-init();
-animate();
-
-function init() {
-    addPlayerToScene(scene);
-}
 
 export function addToScene(obj){
     scene.add(obj);
 }
 
+addPlayerToScene();
 environmentinit();
+animate();
 
 function animate() {
     requestAnimationFrame(animate);
-
-    
-    //moveControls = returnValues();
 
     // time inbetween frames
     const delta = clock.getDelta();

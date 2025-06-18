@@ -1,6 +1,8 @@
 // Import Three.js
 import * as THREE from 'three';
 
+import { addToScene } from './main.js';
+
 // Player sizing and spawn info
 export const playerSize = new THREE.Vector3(1, 2, 1);
 export const playerHeight = 2;
@@ -27,10 +29,10 @@ export const playerModel = new Cube({
     d: playerSize.z
 });
 
-// Add the player to the provided scene
-export function addPlayerToScene(scene) {
+// Add the player to the provided scene and turn off rendering (Still casts a shadow)
+export function addPlayerToScene() {
     playerModel.object.material.colorWrite = false;
     playerModel.object.material.depthWrite = false;
     playerModel.object.material.polygonOffset = true;
-    scene.add(playerModel.object);
+    addToScene(playerModel.object);
 }

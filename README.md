@@ -23,12 +23,13 @@ Then open [http://localhost:8000/](http://localhost:8000/) in your browser and c
 ## File Overview
 
 - `index.html` – sets up the page, crosshair overlays and loads `main.js`
-- `main.js` – initializes the scene, handles the animation loop and player movement
+- `main.js` – initializes the scene, handles the animation loop
 - `controls.js` – keyboard/mouse input and pointer lock
 - `environment.js` – walls, floor and lights (objects you can collide with)
 - `shootzoom.js` – raycasting and zoom logic
 - `scene.js` – creates the Three.js renderer, camera and loads HDR backgrounds
-- `player.js` & `physics.js` – placeholders for future logic
+- `player.js` – creates a model for the player
+- `physics.js` – defines constants and implements player movement and collision detection
 - `Textures/` – HDRs and texture images used by the environment
 
 Enjoy exploring the code and tweaking the demo!
