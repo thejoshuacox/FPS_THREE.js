@@ -1,7 +1,8 @@
 // Import Three.js
 import * as THREE from 'three';
 import { moveControls, zoomControls } from './controls.js';
-import { playerSize, playerBBox, playerHeight, playerModel, spawnPos } from './player.js';
+import { playerSize, playerBBox, playerHeight, playerModel } from './player.js';
+import { spawnPos } from './environment3.js';
 
 // Objects to test collisions against
 export const collidableObjects = [];
@@ -13,7 +14,8 @@ const zoomedSpeed = 40.0;
 const inAirSpeed = 8.0;
 
 const gravity = 25;
-const jumpHeight = 12;
+const jumpHeight = 12; // Default 12
+const thrustHeight = 30; // Default 12
 let movementSpeed = walkSpeed;
 const dampingFactor = 0.18;
 let damping = Math.exp(-dampingFactor);
@@ -30,10 +32,18 @@ export function updatePhysics(delta, camera, controls) {
     if (moveControls.canJump && zoomControls.zoomedOut) movementSpeed = walkSpeed;
     if (moveControls.canJump && zoomControls.zoomedIn) movementSpeed = zoomedSpeed;
 
+    // Jumping
     if (moveControls.jumping) {
         moveControls.jumping = false;
         velocity.y += jumpHeight;
         moveControls.canJump = false;
+        damping = 1.0; // Disable friction while in the air
+        movementSpeed = inAirSpeed;
+    }
+
+    // Jetpack
+    if (moveControls.thrust) {
+        velocity.y += thrustHeight * delta;
         damping = 1.0; // Disable friction while in the air
         movementSpeed = inAirSpeed;
     }

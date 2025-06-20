@@ -6,9 +6,11 @@ import * as THREE from 'three';
 // Import local files
 import {sceneinit} from './scene.js';
 import {controlsinit, moveControls, zoomControls} from './controls.js';
-import { addPlayerToScene, spawnPos } from './player.js';
+import { addPlayerToScene } from './player.js';
 import { updatePhysics } from './physics.js';
 import {environmentinit} from './environment.js';
+import {environment2init} from './environment2.js';
+import {environment3init, spawnPos} from './environment3.js';
 import { originalFOV, zoomDuration, zoomedFOV } from './shootzoom.js';
 
 const clock = new THREE.Clock();
@@ -21,7 +23,7 @@ export function addToScene(obj){
 }
 
 addPlayerToScene();
-environmentinit();
+environment3init();
 animate();
 
 function animate() {

@@ -16,6 +16,7 @@ export function sceneinit(originalFOV, spawnPos) {
             10000 // Far clipping plane
         );
         camera.position.set(spawnPos.x, spawnPos.y, spawnPos.z); // Move camera to the spawn position
+        camera.rotation.y = 3.14;
     
         // Set up the renderer
         const renderer = new THREE.WebGLRenderer({ antialias: true });
