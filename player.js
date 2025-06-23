@@ -2,11 +2,11 @@
 import * as THREE from 'three';
 
 import { addToScene } from './main.js';
-import {spawnPos} from './environment3.js';
 
 // Player sizing and spawn info
 export const playerSize = new THREE.Vector3(1, 2, 1);
 export const playerHeight = 2;
+export const spawnPos = new THREE.Vector3(0, playerHeight, 0);
 export const playerBBox = new THREE.Box3();
 
 // Temporary cube model used as the player

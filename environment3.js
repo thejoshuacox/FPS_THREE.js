@@ -3,8 +3,9 @@
 import * as THREE from 'three';
 import { collidableObjects } from './physics.js';
 import { addToScene } from './main.js';
+import { playerHeight, spawnPos } from './player.js';
 
-export const spawnPos = new THREE.Vector3(0, 2, -14);
+spawnPos.set(0, playerHeight, -14);
 
 export function environment3init() {
     const zoneWidth = 20;
@@ -95,7 +96,7 @@ export function environment3init() {
     // ---- 6. Sunset Debris Hall ----
     const zone6 = makeFloor(-20, 0x666666);
     const light = new THREE.DirectionalLight(0xffddaa, 2.5);
-    light.position.set(-5, 100, 50);
+    light.position.set(-10, 200, 100);
     light.castShadow = true;
     light.shadow.mapSize.width = 4096;
     light.shadow.mapSize.height = 4096;
@@ -107,7 +108,7 @@ export function environment3init() {
     light.shadow.camera.bottom = -30;
     addToScene(light);
     const lightDown = new THREE.DirectionalLight(0xffddaa, 2.5);
-    lightDown.position.set(0, 60, 0);
+    lightDown.position.set(0, 600, 0);
     lightDown.castShadow = true;
     lightDown.shadow.mapSize.width = 4096;
     lightDown.shadow.mapSize.height = 4096;
@@ -116,7 +117,7 @@ export function environment3init() {
     lightDown.shadow.camera.left = -50;
     lightDown.shadow.camera.right = 50;
     lightDown.shadow.camera.top = 30;
-    lightDown.shadow.camera.bottom = -30;
+    lightDown.shadow.camera.bottom = -300;
     addToScene(lightDown);
 }
 

@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import { moveControls, zoomControls } from './controls.js';
 import { playerSize, playerBBox, playerHeight, playerModel } from './player.js';
-import { spawnPos } from './environment3.js';
+import { spawnPos } from './player.js';
 
 // Objects to test collisions against
 export const collidableObjects = [];
@@ -15,10 +15,11 @@ const inAirSpeed = 8.0;
 
 const gravity = 25;
 const jumpHeight = 12; // Default 12
-const thrustHeight = 30; // Default 12
+const thrustHeight = 45; // Fighting gravity
 let movementSpeed = walkSpeed;
 const dampingFactor = 0.18;
 let damping = Math.exp(-dampingFactor);
+let verticalDrag = Math.exp(-.008);
 const velocity = new THREE.Vector3();
 const minimumVelocity = 0.01; // velocity will be 0 below this
 const direction = new THREE.Vector3();
@@ -26,6 +27,7 @@ const cameraDir = new THREE.Vector3();
 let yaw;
 let yawEuler;
 let yawQuaternion;
+
 
 // Update physics and collisions each frame
 export function updatePhysics(delta, camera, controls) {
@@ -44,7 +46,7 @@ export function updatePhysics(delta, camera, controls) {
     // Jetpack
     if (moveControls.thrust) {
         velocity.y += thrustHeight * delta;
-        damping = 1.0; // Disable friction while in the air
+        damping = 1.0; // Enable drag while in the air
         movementSpeed = inAirSpeed;
     }
 
@@ -54,6 +56,9 @@ export function updatePhysics(delta, camera, controls) {
     // Apply friction
     if (Math.abs(velocity.x) < minimumVelocity) velocity.x = 0; else velocity.x *= damping;
     if (Math.abs(velocity.z) < minimumVelocity) velocity.z = 0; else velocity.z *= damping;
+
+    // Apply air drag
+    if (Math.abs(velocity.y) < minimumVelocity) velocity.y = 0; else velocity.y *= verticalDrag;
 
     // Determine movement direction from keys
     direction.set(0, 0, 0);
