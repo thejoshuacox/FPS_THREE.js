@@ -6,7 +6,8 @@ import { addToScene } from './main.js';
 // Player sizing and spawn info
 export const playerSize = new THREE.Vector3(1, 2, 1);
 export const playerHeight = 2;
-export const spawnPos = new THREE.Vector3(0, playerHeight, 0);
+export const spawnPos = new THREE.Vector3(0, 0, 0);
+//export const 
 export const playerBBox = new THREE.Box3();
 
 // Temporary cube model used as the player
@@ -21,9 +22,9 @@ class Cube {
 }
 
 export const playerModel = new Cube({
-    //x: spawnPos.x - playerSize.x / 2,
-    //y: spawnPos.y - playerSize.y / 2,
-    //z: spawnPos.z - playerSize.z / 2,
+    x: spawnPos.x - playerSize.x / 2,
+    y: spawnPos.y + playerHeight - playerSize.y / 2,
+    z: spawnPos.z - playerSize.z / 2,
     w: playerSize.x,
     h: playerSize.y,
     d: playerSize.z

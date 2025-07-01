@@ -227,4 +227,31 @@ export function environment4init() {
     addBox({ w: deckW - 6, h: 2, d: 0.1, x: 0, y: 1, z: currentZ + deckL / 2 - 0.05, color: 0xff00ff });
     addBox({ w: 0.1, h: 2, d: deckL - 6, x: -deckW / 2 + 0.05, y: 1, z: currentZ, color: 0xff00ff });
     addBox({ w: 0.1, h: 2, d: deckL - 6, x: deckW / 2 - 0.05, y: 1, z: currentZ, color: 0xff00ff });
+
+    //Lighting
+    const zone6 = makeFloor(-20, 0x666666);
+    const light = new THREE.DirectionalLight(0xffddaa, 2.5);
+    light.position.set(-10, 200, 100);
+    light.castShadow = true;
+    light.shadow.mapSize.width = 4096;
+    light.shadow.mapSize.height = 4096;
+    light.shadow.camera.near = 1;
+    light.shadow.camera.far = 1000;
+    light.shadow.camera.left = -50;
+    light.shadow.camera.right = 50;
+    light.shadow.camera.top = 30;
+    light.shadow.camera.bottom = -30;
+    addToScene(light);
+    const lightDown = new THREE.DirectionalLight(0xffddaa, 2.5);
+    lightDown.position.set(0, 600, 0);
+    lightDown.castShadow = true;
+    lightDown.shadow.mapSize.width = 4096;
+    lightDown.shadow.mapSize.height = 4096;
+    lightDown.shadow.camera.near = 1;
+    lightDown.shadow.camera.far = 1000;
+    lightDown.shadow.camera.left = -50;
+    lightDown.shadow.camera.right = 50;
+    lightDown.shadow.camera.top = 30;
+    lightDown.shadow.camera.bottom = -300;
+    addToScene(lightDown);
 }

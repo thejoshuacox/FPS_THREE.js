@@ -14,7 +14,7 @@ const zoomedSpeed = 40.0;
 const inAirSpeed = 8.0;
 
 const gravity = 25;
-const jumpHeight = 12; // Default 12
+const jumpHeight = 0; // Default 12
 const thrustHeight = 45; // Fighting gravity
 let movementSpeed = walkSpeed;
 const dampingFactor = 0.18;
