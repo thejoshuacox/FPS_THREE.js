@@ -1,6 +1,7 @@
 // Import Three.js
 import * as THREE from 'three';
 import {RGBELoader} from 'three/addons/loaders/RGBELoader.js';
+import { playerHeight } from './player.js';
 
 // All code related to creating and configuring the Three.js scene, camera, renderer, lights, and asset loading
 export function sceneinit(originalFOV, spawnPos) {
@@ -15,7 +16,8 @@ export function sceneinit(originalFOV, spawnPos) {
             0.05, // Near clipping plane
             10000 // Far clipping plane
         );
-        camera.position.set(spawnPos.x, spawnPos.y, spawnPos.z); // Move camera to the spawn position
+        camera.position.set(spawnPos.x, spawnPos.y + playerHeight, spawnPos.z); // Move camera to the spawn position
+        camera.rotation.y = 0; //3.14 radians is 180 degrees
     
         // Set up the renderer
         const renderer = new THREE.WebGLRenderer({ antialias: true });

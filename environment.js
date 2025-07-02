@@ -3,6 +3,9 @@ import * as THREE from 'three';
 
 import { collidableObjects } from './physics.js';
 import { addToScene } from './main.js';
+import { spawnPos, playerHeight } from './player.js';
+
+spawnPos.set(0, 0, 5);
 
 class Wall {
     constructor({x=0, y=2.5, z=-5, w=6, h=5, d=1} = {}){

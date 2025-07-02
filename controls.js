@@ -14,7 +14,8 @@ export const moveControls = {
     moveLeft: false,
     moveRight: false,
     jumping: false,
-    canJump: true
+    canJump: true,
+    thrust: false
 };
 
 export const zoomControls = {
@@ -111,6 +112,7 @@ function onKeyDown(event) {
             break;
         case 'Space':
             if (moveControls.canJump === true) moveControls.jumping = true;
+            moveControls.thrust = true;
             break;
     }
 }
@@ -129,6 +131,8 @@ function onKeyUp(event) {
         case 'KeyD':
             moveControls.moveRight = false;
             break;
+        case 'Space':
+            moveControls.thrust = false;
     }
 }
 
