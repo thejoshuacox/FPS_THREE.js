@@ -9,6 +9,7 @@ import {controlsinit, moveControls, zoomControls} from './controls.js';
 import { addPlayerToScene, spawnPos } from './player.js';
 import { updatePhysics } from './physics.js';
 import {environmentinit} from './environment_open.js';
+import { initBots, updateBots } from './bots.js';
 import { originalFOV, zoomDuration, zoomedFOV } from './shootzoom.js';
 
 const clock = new THREE.Clock();
@@ -22,6 +23,7 @@ export function addToScene(obj){
 
 addPlayerToScene();
 environmentinit();
+initBots();
 animate();
 
 function animate() {
@@ -59,6 +61,8 @@ function animate() {
 
         updatePhysics(delta, camera, controls);
     }
+
+    updateBots(delta, camera.position);
 
     
     /* Rotate the cube for some animation
