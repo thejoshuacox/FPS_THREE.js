@@ -8,7 +8,7 @@ import {sceneinit} from './scene.js';
 import {controlsinit, moveControls, zoomControls} from './controls.js';
 import { addPlayerToScene, spawnPos } from './player.js';
 import { updatePhysics } from './physics.js';
-import {environmentinit} from './environment.js';
+import {environmentinit} from './environment_open.js';
 import { originalFOV, zoomDuration, zoomedFOV } from './shootzoom.js';
 
 const clock = new THREE.Clock();
