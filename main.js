@@ -63,7 +63,6 @@ function animate() {
         updateBots(delta, camera.position);
     }
 
-
     
     /* Rotate the cube for some animation
     cube1.rotation.x += 0.01;
