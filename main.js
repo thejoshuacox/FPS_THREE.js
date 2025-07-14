@@ -60,9 +60,9 @@ function animate() {
 
 
         updatePhysics(delta, camera, controls);
+        updateBots(delta, camera.position);
     }
 
-    updateBots(delta, camera.position);
 
     
     /* Rotate the cube for some animation

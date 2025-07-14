@@ -6,9 +6,9 @@ const bots = [];
 
 export function initBots() {
     const colors = [
-        0xff0000, 0x00ff00, 0x0000ff, 0xffff00,
-        0xff00ff, 0x00ffff, 0xff8800, 0x88ff00,
-        0x0088ff, 0xff0088, 0x8800ff, 0x00ff88
+        0xff4444, 0x44ff44, 0x4444ff, 0xffff44,
+        0xff44ff, 0x44ffff, 0xff8844, 0x88ff44,
+        0x4488ff, 0xff4488, 0x8844ff, 0x44ff88
     ];
     for (let i = 0; i < 12; i++) {
         const geo = new THREE.CylinderGeometry(0.5, 0.5, 2, 12);
