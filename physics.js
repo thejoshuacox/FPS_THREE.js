@@ -14,13 +14,13 @@ const zoomedSpeed = 40.0;
 const inAirSpeed = 8.0;
 
 const gravity = 25;
-const jumpHeight = 0; // Default 12
+const jumpHeight = 10; // Default 12
 const thrustHeight = 45; // Fighting gravity
 let movementSpeed = walkSpeed;
 const dampingFactor = 0.18;
 let damping = Math.exp(-dampingFactor);
 let verticalDrag = Math.exp(-.008);
-const velocity = new THREE.Vector3();
+const velocity = new THREE.Vector3(); // Velocity of the player
 const minimumVelocity = 0.01; // velocity will be 0 below this
 const direction = new THREE.Vector3();
 const cameraDir = new THREE.Vector3();
@@ -37,7 +37,7 @@ export function updatePhysics(delta, camera, controls) {
     // Jumping
     if (moveControls.jumping) {
         moveControls.jumping = false;
-        velocity.y += jumpHeight;
+        controls.velocity.y += jumpHeight;
         moveControls.canJump = false;
         damping = 1.0; // Disable friction while in the air
         movementSpeed = inAirSpeed;
@@ -45,20 +45,28 @@ export function updatePhysics(delta, camera, controls) {
 
     // Jetpack
     if (moveControls.thrust) {
-        velocity.y += thrustHeight * delta;
+        moveControls.jumping = false;
+        moveControls.canJump = false;
+        controls.velocity.y += thrustHeight * delta;
         damping = 1.0; // Enable drag while in the air
         movementSpeed = inAirSpeed;
     }
 
-    // Apply gravity
-    velocity.y -= gravity * delta;
+    // Apply gravity for player
+    controls.velocity.y -= gravity * delta;
+
+    // Apply gravity for all collidable objects
+    for (const obj in collidableObjects){
+        if(obj.hasOwnProperty('velocity'))
+            obj.velocity.y -= gravity * delta;
+    }
 
     // Apply friction
     if (Math.abs(velocity.x) < minimumVelocity) velocity.x = 0; else velocity.x *= damping;
     if (Math.abs(velocity.z) < minimumVelocity) velocity.z = 0; else velocity.z *= damping;
 
     // Apply air drag
-    if (Math.abs(velocity.y) < minimumVelocity) velocity.y = 0; else velocity.y *= verticalDrag;
+    if (Math.abs(controls.velocity.y) < minimumVelocity) controls.velocity.y = 0; else controls.velocity.y *= verticalDrag;
 
     // Determine movement direction from keys
     direction.set(0, 0, 0);
@@ -83,7 +91,7 @@ export function updatePhysics(delta, camera, controls) {
     // Move the camera
     controls.object.position.x += velocity.x * delta;
     controls.object.position.z += velocity.z * delta;
-    controls.object.position.y += velocity.y * delta;
+    controls.object.position.y += controls.velocity.y * delta;
 
     // Reset if out of bounds
     if (controls.object.position.y < -200) {
@@ -143,12 +151,12 @@ function resolveCollision(objectBBox, controls) {
     } else if (overlap.y < overlap.x && overlap.y < overlap.z) {
         if (controls.object.position.y > objectBBox.getCenter(new THREE.Vector3()).y) {
             controls.object.position.y += overlap.y;
-            velocity.y = 0;
+            controls.velocity.y = 0;
             moveControls.canJump = true;
             damping = Math.exp(-dampingFactor);
         } else {
             controls.object.position.y -= overlap.y;
-            velocity.y = 0;
+            controls.velocity.y = 0;
         }
     } else {
         if (controls.object.position.z > objectBBox.getCenter(new THREE.Vector3()).z) {

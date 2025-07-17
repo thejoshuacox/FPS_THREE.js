@@ -45,6 +45,8 @@ export function controlsinit(camera, renderer) {
     // Initialize controls
     const controls = new PointerLockControls(camera, document.body);
 
+    controls.velocity = new THREE.Vector3(); 
+
     // Hide context menu on right-click
     document.addEventListener('contextmenu', (event) => {
         event.preventDefault();
