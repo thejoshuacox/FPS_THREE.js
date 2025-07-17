@@ -44,6 +44,7 @@ export function environmentinit() {
     const floor = new THREE.Mesh(floorGeometry, floorMaterial);
     floor.receiveShadow = true;
     floor.position.y = -0.25;
+    floor.userData.isGround = true; // flag to ignore in bot collisions
     collidableObjects.push(floor);
     addToScene(floor);
 

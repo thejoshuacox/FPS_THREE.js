@@ -22,6 +22,7 @@ export function initBots() {
             1,
             spawnPos.z + (Math.random() - 0.5) * 80
         );
+        mesh.velocity = new THREE.Vector3();
         addToScene(mesh);
         bots.push({ mesh, aggression: Math.random() });
         collidableObjects.push(mesh);
@@ -57,6 +58,7 @@ function checkCollision(mesh, newPos) {
     botBox.applyMatrix4(new THREE.Matrix4().makeTranslation(newPos.x, newPos.y, newPos.z));
     for (const obj of collidableObjects) {
         if (obj === mesh) continue;
+        if (obj.userData && obj.userData.isGround) continue; // allow sliding on floor
         if (!obj.geometry || !obj.geometry.boundingBox) obj.geometry?.computeBoundingBox?.();
         if (!obj.geometry?.boundingBox) continue;
         const objBox = obj.geometry.boundingBox.clone();
